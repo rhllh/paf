@@ -15,25 +15,5 @@
         </form>
     </div>
     <hr>
-    <div data-th-if="${bookResults.size == 0}">
-        <h2>No results for book titles containing "<span data-th-text="${title}"></span>"</h2>
-    </div>
-    <div data-th-if="${bookResults.size != 0}">
-        <h2><span data-th-text="${bookResults.size}"></span> results for book titles containing "<span data-th-text="${title}"></span>"</h2>
-        <table>
-            <tr data-th-each="book : ${bookResults}">
-                <td>
-                    <img data-th-src="${book.image}" width="150" height="220">
-                </td>
-                <td></td>
-                <td>
-                    <p><strong>Title</strong>: <strong><span data-th-text="${book.title}"></span></strong></p>
-                    <p><strong>Description</strong>: <span data-th-text="${book.description}"></span></p>
-                    <p><strong>Book ID</strong>: <span data-th-text="${book.bookId}"></span></p>
-                    <p><strong>Rating</strong>: <span data-th-text="${book.rating}"></span></p>
-                </td>
-            </tr>
-        </table>
-    </div>
 </body>
 </html>
