@@ -49,6 +49,6 @@ public class UserController {
 
         model.addAttribute("username", username);
         
-        return "created";
+        return "user-created";
     }
 }

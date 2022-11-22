@@ -14,6 +14,6 @@ public class TaskRepository {
     private JdbcTemplate template;
 
     public Integer createTask(Task task) {
-        return template.update(SQL_INSERT_TASK, task.getTask(), task.getPriority(), task.getUsername(), task.getCompletionDate());
+        return template.update(SQL_INSERT_TASK, task.getTask(), task.getPriority().toString(), task.getUsername(), task.getCompletionDate());
     }
 }
