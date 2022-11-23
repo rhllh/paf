@@ -1,8 +1,10 @@
 package vttp2022.day23.models;
 
+import java.io.Serializable;
+
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-public class Style {
+public class Style implements Serializable {
     
     private int id;
     private int catId;
@@ -36,6 +38,7 @@ public class Style {
     public static Style create(SqlRowSet rs) {
         Style s = new Style();
         s.setStyleName(rs.getString("style_name"));
+        s.setId(rs.getInt("id"));
 
         return s;
     }

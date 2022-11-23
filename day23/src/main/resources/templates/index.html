@@ -9,8 +9,8 @@
 <body>
     <h2>Select brew style</h2>
     <form action="/search" method="get">
-        <select name="style" id="style">
-            <option data-th-each="style : ${styleList}" data-th-text="${style.styleName}"></option>
+        <select name="styleId" id="styleId">
+            <option data-th-each="style : ${styleList}" data-th-text="${style.styleName}" data-th-value="${style.id}"></option>
         </select>
         <button type="submit">Search</button>
     </form>

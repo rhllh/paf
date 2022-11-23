@@ -15,11 +15,11 @@ import java.util.List;
 public class StyleRepository {
     
     @Autowired
-    private JdbcTemplate template;
+    private JdbcTemplate jdbcTemplate;
 
     public List<Style> getStyle() {
 
-        final SqlRowSet rs = template.queryForRowSet(SQL_SELECT_STYLE);
+        final SqlRowSet rs = jdbcTemplate.queryForRowSet(SQL_SELECT_STYLE);
 
         List<Style> styleList = new LinkedList<>();
         while (rs.next()) {

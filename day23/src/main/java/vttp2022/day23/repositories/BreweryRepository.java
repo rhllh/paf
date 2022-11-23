@@ -1,27 +1,30 @@
 package vttp2022.day23.repositories;
 
+import static vttp2022.day23.repositories.Queries.*;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import vttp2022.day23.models.Brewery;
 
-import static vttp2022.day23.repositories.Queries.*;
-
-import java.util.LinkedList;
-import java.util.List;
-
 @Repository
 public class BreweryRepository {
 
     @Autowired
-    private JdbcTemplate template;
+    private JdbcTemplate jdbcTemplate;
 
-    public List<Brewery> getBrewery(String styleName) {
-        System.out.println(styleName);
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
-        final SqlRowSet rs = template.queryForRowSet(SQL_SELECT_STYLE_BREWERY, styleName);
+    public List<Brewery> getBreweriesSql(Integer styleId) {
+
+        final SqlRowSet rs = jdbcTemplate.queryForRowSet(SQL_SELECT_BREWERY_BY_STYLE, styleId);
 
         List<Brewery> br = new LinkedList<>();
         while (rs.next()) {
@@ -30,4 +33,19 @@ public class BreweryRepository {
 
         return br;
     }
+
+    public List<Brewery> getBreweriesRedis(Integer styleId) {
+        // check if key exists in redis
+        List<Brewery> br = new LinkedList<>();
+        if (redisTemplate.hasKey(String.valueOf(styleId))) {
+            System.out.println("here");
+            br = (List<Brewery>) redisTemplate.opsForValue().get(String.valueOf(styleId));
+        } else {
+            br = getBreweriesSql(styleId);
+            redisTemplate.opsForValue().set(String.valueOf(styleId), br);
+        }
+        
+        return br;
+    }
+
 }
