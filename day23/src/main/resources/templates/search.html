@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2><span data-th-if="${breweries.size != 0}">Breweries</span>
+        <span data-th-if="${breweries.size == 0}">No breweries found</span>
+        with brew style '<span data-th-text="${styleName}"></span>'</h2>
+    <table>
+        <tr data-th-each="brewery : ${breweries}">
+            <td data-th-text="${brewery.name}"></td>
+        </tr>
+    </table>
+    <form action="/" method="get">
+        <button type="submit">Back</button>
+    </form>
+</body>
+</html>
