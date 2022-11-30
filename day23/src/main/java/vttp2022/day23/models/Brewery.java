@@ -1,10 +1,11 @@
 package vttp2022.day23.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-public class Brewery {
+public class Brewery implements Serializable {
     
     private int id;
     private String name;

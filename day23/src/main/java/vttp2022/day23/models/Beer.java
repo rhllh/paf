@@ -1,8 +1,9 @@
 package vttp2022.day23.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Beer {
+public class Beer implements Serializable {
     
     private int id;
     private int breweryId;

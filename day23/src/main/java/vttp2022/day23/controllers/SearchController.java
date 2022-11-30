@@ -20,11 +20,12 @@ public class SearchController {
     private BreweryRepository breweryRepo;
 
     @GetMapping
-    public String getBrewery(@RequestParam("style") String styleName, Model model) {
+    public String getBrewery(@RequestParam("styleId") Integer styleId,
+                             Model model) {
 
-        List<Brewery> brList = breweryRepo.getBrewery(styleName);
+        // look-aside caching
+        List<Brewery> brList = breweryRepo.getBreweriesRedis(styleId);
 
-        model.addAttribute("styleName", styleName);
         model.addAttribute("breweries", brList);
 
         return "search";
