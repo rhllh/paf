@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Order ID:</td>
+            <td><span data-th-text="${order.orderId}"></span></td>
+        </tr>
+        <tr>
+            <td>Order Date:</td>
+            <td><span data-th-text="${order.orderDate}"></span></td>
+        </tr>
+        <tr>
+            <td>Customer ID:</td>
+            <td><span data-th-text="${order.customerId}"></span></td>
+        </tr>
+        <tr>
+            <td>Total Price of Order:</td>
+            <td><span data-th-text="${order.totalDiscountedPrice}"></span></td>
+        </tr>
+        <tr>
+            <td>Cost Price:</td>
+            <td><span data-th-text="${order.costPrice}"></span></td>
+        </tr>
+    </table>
+</body>
+</html>
