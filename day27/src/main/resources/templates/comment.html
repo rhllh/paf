@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Showing terms "<span data-th-text="${terms}"></span>" with text score >= <span data-th-text="${minScore}"></span></h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Rating</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="c : ${comments}">
+                <td data-th-text="${c.user}"></td>
+                <td data-th-text="${c.rating}"></td>
+                <td data-th-text="${c.c_text}"></td>
+            </tr>
+        </tbody>
+        
+    </table>
+</body>
+</html>

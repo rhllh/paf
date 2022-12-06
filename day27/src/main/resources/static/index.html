@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Comments</title>
+</head>
+<body>
+    <form action="/search" method="get">
+        <table>
+            <tr>
+                <td>Search Comments</td>
+                <td><input type="text" name="searchTerms"></td>
+            </tr>
+            <tr>
+                <td>Minimum Text Score</td>
+                <td><select name="score">
+                    <option value="0.5" selected>0.5</option>
+                    <option value="0.7">0.7</option>
+                    <option value="0.9">0.9</option>
+                    <option value="1.0">1.0</option>
+                    <option value="1.2">1.2</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td><button type="submit">Search</button></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
