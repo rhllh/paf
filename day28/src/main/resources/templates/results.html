@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/search" method="get">
+        <table>
+            <tr>
+                <td><input type="text" name="game"></td>
+                <td><button type="submit">Search</button></td>
+            </tr>
+        </table>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <td>Result size: <span data-th-text="${resultSize}"></span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>Name</td>
+                        <td>User</td>
+                        <td>Comment</td>
+                        <td>Rating</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-th-each="g: ${game}">
+                        <td><img data-th-src="${g.image}"></td>
+                        <td><span data-th-text="${g.name}"></span></td>
+                        <td><span data-th-text="${g.user}"></span></td>
+                        <td><span data-th-text="${g.comment}"></span></td>
+                        <td><span data-th-text="${g.rating}"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </tbody>
+    </table>
+</body>
+</html>
