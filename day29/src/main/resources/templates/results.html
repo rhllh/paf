@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/search" method="get">
+        <table>
+            <tr>
+                <td><input type="text" name="hero"></td>
+                <td><button type="submit">Search</button></td>
+            </tr>
+        </table>
+    </form>
+    <table border="1">
+        <thead>
+            <th></th>
+            <th>Name</th>
+            <th>Description</th>
+        </thead>
+        <tr data-th-each="c : ${cList}">
+            <td><a data-th-href="${c.url}"><img data-th-src="${c.thumbnail}" width="100"></a></td>
+            <td><span data-th-text="${c.name}"></span></td>
+            <td><span data-th-text="${c.description}"></span></td>
+        </tr>
+    </table>
+</body>
+</html>
