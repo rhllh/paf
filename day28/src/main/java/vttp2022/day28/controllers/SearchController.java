@@ -22,7 +22,10 @@ public class SearchController {
     @GetMapping
     public String getGame(@RequestParam("game") String name, Model model) {
 
+        System.out.println("name > " + name);
+
         List<Game> results = repo.search(name);
+        System.out.println("resultSize > " + results.size());
 
         model.addAttribute("game", results);
         model.addAttribute("resultSize", results.size());

@@ -36,7 +36,7 @@ public class GameRepo {
         },
         {
             $lookup: {
-                from: 'comment',
+                from: 'comments',
                 foreignField: 'gid',
                 localField: 'gid',
                 as: 'comments'
@@ -67,27 +67,27 @@ public class GameRepo {
         MatchOperation match = Aggregation.match(Criteria.where("name").regex(name, "i"));
 
         // $lookup
-        LookupOperation lookup = Aggregation.lookup("comment", "gid", "gid", "comments");
+        LookupOperation lookup = Aggregation.lookup("comments", "gid", "gid", "comments");
 
-        // $project _id, name
-        ProjectionOperation projection = Aggregation.project("_id", "name", "image", "comments");
-
+        // $project
+        ProjectionOperation projection1 = Aggregation.project("name", "comments", "image");
+        
         // $unwind comments
         UnwindOperation unwind = Aggregation.unwind("comments");
 
-        // $sort
-        SortOperation sort = Aggregation.sort(Direction.DESC, "comments.rating");
-
-        // $limit
-        LimitOperation limit = Aggregation.limit(10);
-        
         // $project { _id: 1, name: 1, user: "$comments.user", comment: "$comments.c_text", rating: "$comments.rating", image: 1 }
-        ProjectionOperation projection2 = Aggregation.project("_id", "name", "image")
+        ProjectionOperation projection2 = Aggregation.project("name", "image")
                             .and("comments.user").as("user")
                             .and("comments.c_text").as("comment")
                             .and("comments.rating").as("rating");
 
-        Aggregation pipeline = Aggregation.newAggregation(match, lookup, projection, unwind, sort, limit, projection2);
+        // $sort
+        SortOperation sort = Aggregation.sort(Direction.DESC, "rating");
+
+        // $limit
+        LimitOperation limit = Aggregation.limit(10);
+        
+        Aggregation pipeline = Aggregation.newAggregation(match, lookup, projection1, unwind, projection2, sort, limit);
 
         AggregationResults<Document> results = template.aggregate(pipeline, "games", Document.class);
 
