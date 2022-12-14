@@ -35,13 +35,31 @@ public class BookRepository {
         return books;
     }
 
-    public List<Book> getBooksByTitleAndLimit(String title, Integer numResult) {
+    public List<Book> getBooksByTitle(String title) {
 
         //SqlRowSet rs = template.queryForRowSet(SQL_SELECT_BOOKS_BY_TITLE_AND_LIMIT, "%"+title+"%", numResult);
-        SqlRowSet rs = template.queryForRowSet(SQL_SELECT_BOOKS_BY_TITLE_AND_LIMIT, "%%%s%%".formatted(title), numResult);
+        SqlRowSet rs = template.queryForRowSet(SQL_SELECT_BOOKS_BY_TITLE, "%%%s%%".formatted(title));
 
         final List<Book> books = new LinkedList<>();
 
+        while (rs.next()) {
+            Book b = Book.create(rs);
+            books.add(b);
+        }
+
+        return books;
+    }
+
+    public List<Book> getBooksByTitleAndOffset(String title, Integer offset) {
+
+        SqlRowSet rs;
+        if (offset == 0) {
+            rs = template.queryForRowSet(SQL_SELECT_BOOKS_BY_TITLE, "%%%s%%".formatted(title));
+        } else {
+            rs = template.queryForRowSet(SQL_SELECT_BOOKS_BY_TITLE_AND_OFFSET, "%%%s%%".formatted(title), offset);
+        }
+
+        final List<Book> books = new LinkedList<>();
         while (rs.next()) {
             Book b = Book.create(rs);
             books.add(b);

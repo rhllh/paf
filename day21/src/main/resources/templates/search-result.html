@@ -8,24 +8,29 @@
 </head>
 <body>
     <div>
-        <form data-th-action="@{/search}" method="get">
-            <p>Book Title: <input type="text" name="title"></p>
-            <p>Number of Results: <input type="text" name="numResult"></p>
-            <button type="submit">Submit</button>
-        </form>
+        <form action="/search" method="get">
+            <table>
+                <tr>
+                    <td>Book title keyword:</td>
+                    <td><input type="text" name="title"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </table>
+        </form> 
     </div>
     <hr>
     <div data-th-if="${bookResults.size == 0}">
         <h2>No results for book titles containing "<span data-th-text="${title}"></span>"</h2>
     </div>
     <div data-th-if="${bookResults.size != 0}">
-        <h2><span data-th-text="${bookResults.size}"></span> results for book titles containing "<span data-th-text="${title}"></span>"</h2>
-        <table>
+        <h2>Page <span data-th-text="${offset / 5 + 1}"></span> of results for book titles containing "<span data-th-text="${title}"></span>"</h2>
+        <table border="1">
             <tr data-th-each="book : ${bookResults}">
                 <td>
                     <img data-th-src="${book.image}" width="150" height="220">
                 </td>
-                <td></td>
                 <td>
                     <p><strong>Title</strong>: <strong><span data-th-text="${book.title}"></span></strong></p>
                     <p><strong>Description</strong>: <span data-th-text="${book.description}"></span></p>
@@ -34,6 +39,19 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div>
+        <form data-th-unless="${offset == 0}" action="/search/previous" method="post">
+            <input type="hidden" name="offset" data-th-value="${offset}">
+            <input type="hidden" name="title" data-th-value="${title}">
+            <button type="submit">Previous</button>
+        </form>
+        <form data-th-unless="${bookResults.size lt 5}" action="/search/next" method="post">
+            <input type="hidden" name="offset" data-th-value="${offset}">
+            <input type="hidden" name="title" data-th-value="${title}">
+            <button type="submit">Next</button>
+        </form>
+        
     </div>
 </body>
 </html>
