@@ -119,7 +119,7 @@ public class TaskController {
             taskSvc.deleteTask(taskId);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            model.addAttribute("errorMsg : %s. Task ID %s was not deleted successfully.".formatted(e.getMessage(),taskId));
+            model.addAttribute("errorMsg", "%s. Task ID %s was not deleted successfully.".formatted(e.getMessage(),taskId));
             return "error";
         }
 
