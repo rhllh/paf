@@ -9,55 +9,68 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container-fluid text-center">
-        <h2>To-do List</h2>
-    </div>
-
     <div class="container-fluid">
+        <h2>To-do List</h2>
+
         <form action="/tasks" method="get">
             <div class="row">
                 <div class="col">Username</div>
             </div>
             <div class="row">
-                <div class="col"><input type="text" name="username" id="username" data-th-value="${username}"></div>
-            </div>
-        </form>
-    </div> 
-    
-    <hr>
-    <form data-th-action="@{/tasks/{username}/save(username=${user.username})}" method="post">
-        <div class="container-fluid" id="formInput">
-            <div class="row">
-                <div class="col-sm-1"><button type="submit" class="btn btn-primary">Save</button></div>
-                <div class="col-sm-1"><button type="button" class="btn btn-primary" id="rowAdder">Add Task</button></div>
-            </div>
-            <div class="row">
-                <div class="col-sm">Description</div>
-                <div class="col-sm">Priority</div>
-                <div class="col-sm">Due Date</div>
-                <div class="col-sm"></div>
-            </div>
-            <div data-th-unless="${user.getUserId == null}" class="row" data-th-each="task : ${user.taskList}">
-                <div class="col-sm"><input type="text" name="description" data-th-value="${task.description}"></div>
-                <div class="col-sm"><input type="text" name="priority" data-th-value="${task.priority}"></div>
-                <div class="col-sm"><input type="date" name="dueDate" data-th-value="${task.dueDate}"></div>
-                <div class="col-sm">
-                    <input type="hidden" name="taskId" data-th-value="${task.taskId}">
-                    <a data-th-href="@{/tasks/{username}/delete/{taskId}(username=${user.username}, taskId=${task.taskId})}">
-                        <button type="button" data-th-id="'deleteRowBtn' + ${task.taskId}" class="btn btn-primary">x</button>
-                    </a>
+                <div class="col">
+                    <input type="text" name="username" id="username" data-th-value="${username}">
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
-    <hr>
+        <hr>
 
-    <div class="container-fluid">
-        <a href="/">Home</a>
-    </div>
+        <form data-th-action="@{/tasks/{username}/save(username=${user.username})}" method="post">
+            <div class="my-3" id="formInput">
+            
+                <div class="row">
+                    <div class="col"><button type="submit" class="btn btn-primary">Save</button></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"><button type="button" class="btn btn-primary" id="rowAdder">Add Task</button></div>
+                </div>
+                <div class="row py-2">
+                    <div class="col">Description</div>
+                    <div class="col">Priority</div>
+                    <div class="col">Due Date</div>
+                    <div class="col"></div>
+                </div>
+                <div class="row py-2" data-th-unless="${user.getUserId == null}" data-th-each="task : ${user.taskList}">
+                    <div class="col">
+                        <input type="text" name="description" data-th-value="${task.description}">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="priority" data-th-value="${task.priority}">
+                    </div>
+                    <div class="col">
+                        <input type="date" name="dueDate" data-th-value="${task.dueDate}">
+                    </div>
+                    <div class="col">
+                        <input type="hidden" name="taskId" data-th-value="${task.taskId}">
+                        <a data-th-href="@{/tasks/{username}/delete/{taskId}(username=${user.username}, taskId=${task.taskId})}">
+                            <button type="button" data-th-id="'deleteRowBtn' + ${task.taskId}" class="btn btn-primary">x</button>
+                        </a>
+                    </div>
+                </div>
+            
+            </div>
+        </form>
+
+        <hr>
+
+        <footer>
+            <a href="/">Home</a>
+        </footer>
+
+    </div> 
 </body>
 </html>
+
 <script>
     $("#username").focus(function () {
       $(this).mouseleave(function () {
@@ -70,13 +83,13 @@
 
     $("#rowAdder").click(function () {
         newRowAdd = 
-            '<div class="row"> <div class="col-sm">' +
+            '<div class="row py-2"> <div class="col">' +
             '<input type="text" name="description"> </div>' +
-            '<div class="col-sm"> <input type="text" name="priority">' +
-            '</div> <div class="col-sm"> <input type="date" name="dueDate">' +
-            '</div> <div class="col-sm"> <input type="hidden" name="taskId" data-th-value="${task.taskId} + ${1}">' +
-            '<form data-th-action="@{/tasks/{username}/delete/{taskId}(username=${user.username}, taskId=${task.taskId})}" method="post"> ' +
-            '<button type="submit" data-th-id="\'deleteRowBtn\' + ${task.taskId}" class="btn btn-primary">x</button></form> </div> </div>';
+            '<div class="col"> <input type="text" name="priority">' +
+            '</div> <div class="col"> <input type="date" name="dueDate">' +
+            '</div> <div class="col"> <input type="hidden" name="taskId" data-th-value="${task.taskId} + ${1}">' +
+            '<a data-th-href="@{/tasks/{username}/delete/{taskId}(username=${user.username}, taskId=${task.taskId})}"> ' +
+            '<button type="button" data-th-id="\'deleteRowBtn\' + ${task.taskId}" class="btn btn-primary">x</button> </a> </div> </div>';
         
         $('#formInput').append(newRowAdd);
     });
