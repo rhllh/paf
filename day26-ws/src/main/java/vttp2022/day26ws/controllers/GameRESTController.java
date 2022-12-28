@@ -38,7 +38,7 @@ public class GameRESTController {
      *   timestamp: ""
      * }
      */
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getAllGames(@RequestParam(value="limit", required=false, defaultValue="25") Integer limit,
                                               @RequestParam(value="offset", required=false, defaultValue="0") Integer offset) {
         
@@ -73,7 +73,7 @@ public class GameRESTController {
      * games in ascending ranking order
      * same return format as getAllGames()
      */
-    @GetMapping(path="/rank", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/rank", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getGamesByRank(@RequestParam(value="limit", required=false, defaultValue="25") Integer limit,
                                @RequestParam(value="offset", required=false, defaultValue="0") Integer offset) {
         // call service

@@ -81,7 +81,7 @@ public class BGRESTController {
         return ResponseEntity.status(HttpStatus.OK).body("Review ID %s successfully updated".formatted(reviewId));
     }
 
-    @GetMapping(path = "/review/{reviewId}", consumes = MediaType.APPLICATION_JSON_VALUE, 
+    @GetMapping(path = "/review/{reviewId}", 
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getReview(@PathVariable("reviewId") String reviewId) {
 
@@ -106,7 +106,7 @@ public class BGRESTController {
         return ResponseEntity.status(HttpStatus.OK).body(j.toString());
     }
 
-    @GetMapping(path = "/review/{reviewId}/history", consumes = MediaType.APPLICATION_JSON_VALUE, 
+    @GetMapping(path = "/review/{reviewId}/history", 
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getReviewHistory(@PathVariable("reviewId") String reviewId) {
 

@@ -21,7 +21,7 @@ public class BGRESTController {
     @Autowired
     private BGService service;
     
-    @GetMapping(path="/game/{gameId}/reviews", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/game/{gameId}/reviews", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getGameReviews(@PathVariable("gameId") String gameIdString) {
 
         Integer gameId = 0;
@@ -42,7 +42,7 @@ public class BGRESTController {
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(j.toString());
     }
 
-    @GetMapping(path="/games/{highOrLow}", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/games/{highOrLow}", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getGamesByRating(@PathVariable("highOrLow") String highOrLow) {
         highOrLow = highOrLow.toUpperCase();
 
